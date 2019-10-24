@@ -21,16 +21,7 @@ public class FeesCalculatorDepositTest {
         calculator = new FeesCalculator();
     }
     
-    @Test //DT1
-    public void depositWhenStudentInvalidInput() {
-    	boolean student = true;
-    	int deposit = -50;
-    	int balance = 500;
-    	double percent = 0;
-        int expected = (int) round(deposit * percent(percent));
-        assertThat(calculator.calculateDepositInterest(deposit * 100, balance * 100, student) / 100, is(expected));
-    }
-
+    //Test case DT1
     @Test
     public void depositWhenStudentLowDepositLowBalance() {
     	boolean student = true;
@@ -41,6 +32,7 @@ public class FeesCalculatorDepositTest {
         assertThat(calculator.calculateDepositInterest(deposit * 100, balance * 100, student) / 100, is(expected));
     }
 
+  //Test case DT2
     @Test
     public void depositWhenMpmStudentLowDepositLowBalance() {
     	boolean student = false;
@@ -51,6 +43,7 @@ public class FeesCalculatorDepositTest {
         assertThat(calculator.calculateDepositInterest(deposit * 100, balance * 100, student) / 100, is(expected));
     }
 
+  //Test case DT3
     @Test
     public void depositWhenNonStudentLowDepositLowBalance() {
     	boolean student = false;
@@ -61,6 +54,7 @@ public class FeesCalculatorDepositTest {
         assertThat(calculator.calculateDepositInterest(deposit * 100, balance * 100, student) / 100, is(expected));
     }
 
+  //Test case DT4
     @Test
     public void depositWhenNonStudentHighDepositHighBalance() {
     	boolean student = false;
