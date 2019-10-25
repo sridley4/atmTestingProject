@@ -1,3 +1,5 @@
+package bank;
+
 import atm.ATM;
 import atm.Session;
 import banking.Money;
