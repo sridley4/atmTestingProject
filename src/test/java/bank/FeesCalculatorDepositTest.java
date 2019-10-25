@@ -34,7 +34,7 @@ public class FeesCalculatorDepositTest {
 
   //Test case DT2
     @Test
-    public void depositWhenMpmStudentLowDepositLowBalance() {
+    public void depositWhenNonStudentLowDepositLowBalance() {
     	boolean student = false;
     	int deposit = 250;
     	int balance = 1500;
@@ -45,7 +45,7 @@ public class FeesCalculatorDepositTest {
 
   //Test case DT3
     @Test
-    public void depositWhenNonStudentLowDepositLowBalance() {
+    public void depositWhenNonStudentLowDepositHighBalance() {
     	boolean student = false;
     	int deposit = 500;
     	int balance = 7500;
