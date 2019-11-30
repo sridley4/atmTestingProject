@@ -38,11 +38,11 @@ public class FeesCalculatorWithdrawalTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data(){
         Object[][] data = new Object[][]{
-                {"WT1", 1000, true, 1, 1000, 0.0},
-                {"WT2", 1000, true, 3, 1000, 0.001},
-                {"WT3", 1000, false, 1, 1000, 0.002},
-                {"WT4", 1000, false, 1, 1000, 0.001},
-                {"WT5", 1000, false, 1, 1000, 0.0},
+                {"WT1", 1000, 1000, true, 1, 0.0},
+                {"WT2", 1000, 1000, true, 3, 0.001},
+                {"WT3", 1000, 1000, false, 1, 0.002},
+                {"WT4", 1000, 1000, false, 1, 0.001},
+                {"WT5", 1000, 1000, false, 1, 0.0},
         };
         return Arrays.asList(data);
     }
