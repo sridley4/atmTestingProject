@@ -1,17 +1,22 @@
 package bank;
 
+import bank.FeesCalculator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import static java.lang.Math.round;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-@RunWith(JUnit4.class)
+@RunWith(Parameterized.class)
 public class FeesCalculatorTransferTest {
-
     private FeesCalculator calculator;
 
     @Before
@@ -19,104 +24,45 @@ public class FeesCalculatorTransferTest {
         calculator = new FeesCalculator();
     }
 
-    @Test
-    public void transferWhenStudentHighTransHighFromHighTo() {
-        int expected = (int) round(120000 * percent(0.125));
-        assertThat(calculator.calculateTransferFee(120000, 150000, 150000, true), is(expected));
+    @Parameter(0)
+    public String testName;
+    @Parameter(1)
+    public boolean student;
+    @Parameter(2)
+    public int amount;
+    @Parameter(3)
+    public int fromAccountBalance;
+    @Parameter(4)
+    public int toAccountBalance;
+    @Parameter(5)
+    public double feePercent;
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> data(){
+        Object[][] data = new Object[][]{
+                {"PathP1", true, 5000, 80000, 80000, 0.001},
+                {"PathP2", true, 5000, 80000, 500000, 0.0005},
+                {"PathP3", true, 5000, 500000, 80000, 0.005},
+                {"PathP4", true, 5000, 500000, 500000, 0.0025},
+                {"PathP5", true, 12000, 80000, 80000, 0.0005},
+                {"PathP6", true, 12000, 80000, 500000, 0.00025},
+                {"PathP7", true, 12000, 500000, 80000, 0.0025},
+                {"PathP8", true, 12000, 500000, 500000, 0.00125},
+                {"PathP9", false, 5000, 80000, 80000, 0.002},
+                {"PathP10", false, 5000, 80000, 500000, 0.001},
+                {"PathP11", false, 5000, 500000, 80000, 0.01},
+                {"PathP12", false, 5000, 500000, 500000, 0.005},
+                {"PathP13", false, 12000, 80000, 80000, 0.001},
+                {"PathP14", false, 12000, 80000, 500000, 0.0005},
+                {"PathP15", false, 12000, 500000, 80000, 0.005},
+                {"PathP16", false, 12000, 500000, 500000, 0.0025},
+        };
+        return Arrays.asList(data);
     }
 
     @Test
-    public void transferWhenStudentHighTransHighFromLowTo() {
-        int expected = (int) round(120000 * percent(0.25));
-        assertThat(calculator.calculateTransferFee(120000, 150000, 60000, true), is(expected));
+    public void testTransferTestCases(){
+        int expected = (int) round(amount * feePercent);
+        assertThat(calculator.calculateTransferFee(amount, fromAccountBalance, toAccountBalance, student), is(expected));
     }
-
-    @Test
-    public void transferWhenStudentHighTransLowFromLowTo() {
-        int expected = (int) round(120000 * percent(0.05));
-        assertThat(calculator.calculateTransferFee(120000, 60000, 60000, true), is(expected));
-    }
-
-    @Test
-    public void transferWhenStudentLowTransLowFromLowTo() {
-        int expected = (int) round(50000 * percent(0.1));
-        assertThat(calculator.calculateTransferFee(50000, 60000, 60000, true), is(expected));
-    }
-
-    @Test
-    public void transferWhenStudentLowTransHighFromHighTo() {
-        int expected = (int) round(50000 * percent(0.25));
-        assertThat(calculator.calculateTransferFee(50000, 150000, 150000, true), is(expected));
-    }
-
-    @Test
-    public void transferWhenStudentHighTransLowFromHighTo() {
-        int expected = (int) round(120000 * percent(0.025));
-        assertThat(calculator.calculateTransferFee(120000, 60000, 150000, true), is(expected));
-    }
-
-    @Test
-    public void transferWhenStudentLowTransLowFromHighTo() {
-        int expected = (int) round(50000 * percent(0.05));
-        assertThat(calculator.calculateTransferFee(50000, 60000, 150000, true), is(expected));
-    }
-
-    @Test
-    public void transferWhenStudentLowTransHighFromLowTo() {
-        int expected = (int) round(50000 * percent(0.25));
-        assertThat(calculator.calculateTransferFee(50000, 150000, 60000, true), is(expected));
-    }
-
-    @Test
-    public void transferWhenNonStudentHighTransHighFromHighTo() {
-        int expected = (int) round(120000 * percent(0.25));
-        assertThat(calculator.calculateTransferFee(120000, 150000, 150000, false), is(expected));
-    }
-
-    @Test
-    public void transferWhenNonStudentHighTransHighFromLowTo() {
-        int expected = (int) round(120000 * percent(0.5));
-        assertThat(calculator.calculateTransferFee(120000, 150000, 60000, false), is(expected));
-    }
-
-    @Test
-    public void transferWhenNonStudentHighTransLowFromLowTo() {
-        int expected = (int) round(120000 * percent(0.1));
-        assertThat(calculator.calculateTransferFee(120000, 60000, 60000, false), is(expected));
-    }
-
-    @Test
-    public void transferWhenNonStudentLowTransLowFromLowTo() {
-        int expected = (int) round(50000 * percent(0.2));
-        assertThat(calculator.calculateTransferFee(50000, 60000, 60000, false), is(expected));
-    }
-
-    @Test
-    public void transferWhenNonStudentLowTransHighFromHighTo() {
-        int expected = (int) round(50000 * percent(0.5));
-        assertThat(calculator.calculateTransferFee(50000, 150000, 150000, false), is(expected));
-    }
-
-    @Test
-    public void transferWhenNonStudentHighTransLowFromHighTo() {
-        int expected = (int) round(120000 * percent(0.05));
-        assertThat(calculator.calculateTransferFee(120000, 60000, 150000, false), is(expected));
-    }
-
-    @Test
-    public void transferWhenNonStudentLowTransLowFromHighTo() {
-        int expected = (int) round(50000 * percent(0.1));
-        assertThat(calculator.calculateTransferFee(50000, 60000, 150000, false), is(expected));
-    }
-
-    @Test
-    public void transferWhenNonStudentLowTransHighFromLowTo() {
-        int expected = (int) round(50000 * percent(1));
-        assertThat(calculator.calculateTransferFee(50000, 150000, 60000, false), is(expected));
-    }
-
-    private static double percent(double percentage) {
-        return percentage / 100;
-    }
-
 }
