@@ -38,11 +38,11 @@ public class FeesCalculatorWithdrawalTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data(){
         Object[][] data = new Object[][]{
-                {"WT1", 1000, 1000, true, 1, 0.0},
-                {"WT2", 1000, 1000, true, 3, 0.001},
-                {"WT3", 1000, 500, false, 1, 0.002},
-                {"WT4", 1000, 5000, false, 1, 0.001},
-                {"WT5", 1000, 20000, false, 1, 0.0},
+                {"WT1", 10000, 10000, true, 1, 0.0},    // amount $1000.00, balance $1,000.00, Student, Sunday, 0% fee
+                {"WT2", 10000, 10000, true, 3, 0.001},  // amount $1000.00, balance $1,000.00, Student, Tuesday, 0% fee
+                {"WT3", 10000, 50000, false, 1, 0.002}, // amount $1000.00, balance $500.00, Not Student, Sunday, 0.2% fee
+                {"WT4", 10000, 500000, false, 1, 0.001},// amount $1000.00, balance $5,000.00, Not Student, Sunday, 0.1% fee
+                {"WT5", 10000, 2000000, false, 1, 0.0}, // amount $1000.00, balance $20,000.00, Not Student, Sunday, 0% fee
         };
         return Arrays.asList(data);
     }
