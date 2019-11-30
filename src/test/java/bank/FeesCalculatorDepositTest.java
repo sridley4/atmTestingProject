@@ -1,6 +1,5 @@
 package bank;
 
-import bank.FeesCalculator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +13,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(Parameterized.class)
-public class FeeCalculatorDepositTest {
+public class FeesCalculatorDepositTest {
     private FeesCalculator calculator;
 
     @Before
