@@ -33,7 +33,7 @@ public class FeesCalculatorWithdrawalTest {
     @Parameter(4)               // input variable
     public int dayOfWeek;
     @Parameter(5)               // intermediate in method
-    public int feePercentage;
+    public double feePercentage;
 
     @Parameterized.Parameters
     public static Collection<Object[]> data(){
@@ -49,7 +49,7 @@ public class FeesCalculatorWithdrawalTest {
 
     @Test
     public void testTransferTestCases(){
-        int expected = round(amount * feePercentage);
+        int expected = (int) round(amount * feePercentage);
         assertThat(calculator.calculateWithdrawalFee(amount, accountBalance, student, dayOfWeek), is(expected));
     }
 }
