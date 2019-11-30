@@ -41,21 +41,21 @@ public class transferTest {
     public static Collection<Object[]> data(){
         Object[][] data = new Object[][]{
                 {"PathP1", true, 5000, 80000, 80000, 0.001},
-                {"PathP2", true, 5000, 80000, 800000, 0.0005},
-                {"PathP3", true, 5000, 800000, 80000, 0.005},
-                {"PathP4", true, 5000, 800000, 800000, 0.0025},
-                {"PathP5", true, 120000, 80000, 80000, 0.0005},
-                {"PathP6", true, 120000, 80000, 800000, 0.00025},
-                {"PathP7", true, 120000, 800000, 80000, 0.0025},
-                {"PathP8", true, 120000, 800000, 800000, 0.00125},
+                {"PathP2", true, 5000, 80000, 500000, 0.0005},
+                {"PathP3", true, 5000, 500000, 80000, 0.005},
+                {"PathP4", true, 5000, 500000, 500000, 0.0025},
+                {"PathP5", true, 12000, 80000, 80000, 0.0005},
+                {"PathP6", true, 12000, 80000, 500000, 0.00025},
+                {"PathP7", true, 12000, 500000, 80000, 0.0025},
+                {"PathP8", true, 12000, 500000, 500000, 0.00125},
                 {"PathP9", false, 5000, 80000, 80000, 0.002},
-                {"PathP10", false, 5000, 80000, 800000, 0.001},
-                {"PathP11", false, 5000, 800000, 80000, 0.01},
-                {"PathP12", false, 5000, 800000, 800000, 0.005},
-                {"PathP13", false, 120000, 80000, 80000, 0.001},
-                {"PathP14", false, 120000, 80000, 800000, 0.0005},
-                {"PathP15", false, 120000, 800000, 80000, 0.005},
-                {"PathP16", false, 120000, 800000, 800000, 0.0055},
+                {"PathP10", false, 5000, 80000, 500000, 0.001},
+                {"PathP11", false, 5000, 500000, 80000, 0.01},
+                {"PathP12", false, 5000, 500000, 500000, 0.005},
+                {"PathP13", false, 12000, 80000, 80000, 0.001},
+                {"PathP14", false, 12000, 80000, 500000, 0.0005},
+                {"PathP15", false, 12000, 500000, 80000, 0.005},
+                {"PathP16", false, 12000, 500000, 500000, 0.0025},
         };
         return Arrays.asList(data);
     }
@@ -64,10 +64,5 @@ public class transferTest {
     public void testTransferTestCases(){
         int expected = (int) round(amount * feePercent);
         assertThat(calculator.calculateTransferFee(amount, fromAccountBalance, toAccountBalance, student), is(expected));
-    }
-
-
-    private static double percent(double percentage) {
-        return percentage / 100;
     }
 }
